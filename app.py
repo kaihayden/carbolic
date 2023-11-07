@@ -34,7 +34,7 @@ if 'files' not in st.session_state:
     st.session_state['files'] = []
 
 if "configurator_state" not in st.session_state:
-    st.session-state["configurator_state"] = True
+    st.session_state["configurator_state"] = True
 
 def toggle_closed():
     st.session_state["configurator_state"] = False
