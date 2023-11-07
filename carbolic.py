@@ -58,7 +58,7 @@ def generate_response(client, thread, assistant):
     run = start_run(client, thread, assistant)
 
     while run.status != 'completed':
-        run = retrieve_run(thread, run)
+        run = retrieve_run(client, thread, run)
         time.sleep(0.5)
         
     log = last_message(client, thread)
