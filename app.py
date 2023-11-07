@@ -8,7 +8,8 @@ from openai import OpenAI
 from carbolic import create_assistant, create_thread, send_message, generate_response
 
 client = OpenAI()
-OpenAI.api_key = st.secrets["OPENAI_API_KEY"]
+os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
+OpenAI.api_key = os.environ["OPENAI_API_KEY"]
 
 # - Params -------------------------------------------------------- #
 assistant_name = 'Carbolic'
