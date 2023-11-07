@@ -16,11 +16,6 @@ assistant_instructions = "You are a legal assistant chatbot. Use your knowledge 
 assistant_files = []
 # ----------------------------------------------------------------- #
 
-st.markdown(
-    '<div style="text-align: right; vertical-align: bottom;">Made by Kai</div>',
-    unsafe_allow_html=True,
-)
-
 st.header("Carbolic", divider="rainbow")
 
 if "model" not in st.session_state:
@@ -102,7 +97,7 @@ position: fixed;
 left: 0;
 bottom: 0;
 width: 100%;
-font-size: 8;
+font-size: 6;
 background-color: white;
 color: black;
 text-align: center;
