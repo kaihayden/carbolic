@@ -98,7 +98,7 @@ left: 0;
 bottom: 0;
 width: 100%;
 font-size: 6;
-background-color: white;
+background-color: transparent;
 color: black;
 text-align: center;
 }
