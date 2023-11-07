@@ -33,24 +33,27 @@ if 'files_uploaded' not in st.session_state:
 if 'files' not in st.session_state:
     st.session_state['files'] = []
 
-# File uploader
-assistant_files = st.file_uploader("Select Files", accept_multiple_files=True)
+if "configurator_state" not in st.session_state:
+    st.session-state["configurator_state"] = True
 
-# If files are uploaded, update the session state
-if assistant_files:
-    st.session_state['files'] = assistant_files
+def toggle_closed():
+    st.session_state["configurator_state"] = False
 
-# Confirm button - only show if files are uploaded or not confirmed yet
-if not st.session_state['files_uploaded'] and assistant_files:
-    if st.button('Confirm Files'):
-        st.session_state['files_uploaded'] = True
+with st.expander("Configurator", expanded=st.session_state['configurator_state']):
 
-# Skip upload button - only show if not confirmed yet
-if not st.session_state['files_uploaded']:
-    if st.button('Skip Upload'):
-        st.session_state['files_uploaded'] = True
+    assistant_files = st.file_uploader("Select Files", accept_multiple_files=True)
 
-# Logic to hide or show the uploader based on the session state
+    if assistant_files:
+        st.session_state['files'] = assistant_files
+
+    if not st.session_state['files_uploaded'] and assistant_files:
+        if st.button('Confirm Files', on_click=toggle_closed):
+            st.session_state['files_uploaded'] = True
+
+    if not st.session_state['files_uploaded']:
+        if st.button('Skip Upload', on_click=toggle_closed):
+            st.session_state['files_uploaded'] = True
+
 if st.session_state['files_uploaded']:
     st.success('Files are confirmed!')
     
