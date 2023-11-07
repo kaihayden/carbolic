@@ -41,7 +41,7 @@ if assistant_files:
     st.session_state['files'] = assistant_files
 
 # Confirm button - only show if files are uploaded or not confirmed yet
-if not st.session_state['files_uploaded'] and uploaded_files:
+if not st.session_state['files_uploaded'] and assistant_files:
     if st.button('Confirm Files'):
         st.session_state['files_uploaded'] = True
 
