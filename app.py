@@ -17,6 +17,11 @@ assistant_instructions = "You are a legal assistant chatbot. Use your knowledge 
 assistant_files=[]
 # ----------------------------------------------------------------- #
 
+st.markdown(
+    '<div style="text-align: right; vertical-align: bottom;">Made by Kai</div>',
+    unsafe_allow_html=True,
+)
+
 st.header("Carbolic", divider='rainbow')
 
 if "model" not in st.session_state:
@@ -89,8 +94,3 @@ if st.session_state['files_uploaded']:
         st.session_state.messages.append(log)
 else:
     st.info('Please upload files or skip upload to proceed.')
-
-st.markdown(
-    '<div style="text-align: right; vertical-align: bottom;">Made by Kai</div>',
-    unsafe_allow_html=True,
-)
