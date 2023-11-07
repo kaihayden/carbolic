@@ -13,13 +13,11 @@ OpenAI.api_key = os.environ["OPENAI_API_KEY"]
 
 # - Params -------------------------------------------------------- #
 assistant_name = 'Carbolic'
-assistant_instructions = """
-You are a legal assistant chatbot. Use your knowledge to perform tasks such as proofreading and answer retrieval to help your solicitor perform their tasks to the highest quality.
-"""
+assistant_instructions = "You are a legal assistant chatbot. Use your knowledge to perform tasks such as proofreading and answer retrieval to help your solicitor perform their tasks to the highest quality."
 assistant_files=[]
 # ----------------------------------------------------------------- #
 
-st.title("Carbolic by Kai")
+st.header("Carbolic by Kai", divider='rainbow')
 
 if "model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-4-1106-preview"
@@ -44,9 +42,9 @@ def toggle_closed():
 
 with st.expander("Configurator", expanded=st.session_state['configurator_state']):
 
-    st.session_state['instructions'] = st.text_area(label='Instructions for Carbolic', value=st.session_state['instructions'])
+    st.session_state['instructions'] = st.text_area(label='Instructions', value=st.session_state['instructions'])
 
-    assistant_files = st.file_uploader("Select Files", accept_multiple_files=True)
+    assistant_files = st.file_uploader("Files", accept_multiple_files=True)
 
     if assistant_files:
         st.session_state['files'] = assistant_files
