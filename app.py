@@ -27,29 +27,58 @@ if "model" not in st.session_state:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+if 'files_uploaded' not in st.session_state:
+    st.session_state['files_uploaded'] = False
+
+if 'files' not in st.session_state:
+    st.session_state['files'] = []
+
+# File uploader
 assistant_files = st.file_uploader("Select Files", accept_multiple_files=True)
-assistant = create_assistant(client, name=assistant_name, instructions=assistant_instructions, files=assistant_files)
 
-thread = create_thread(client)
+# If files are uploaded, update the session state
+if uploaded_files:
+    st.session_state['files'] = assistant_files
 
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
+# Confirm button - only show if files are uploaded or not confirmed yet
+if not st.session_state['files_uploaded'] and uploaded_files:
+    if st.button('Confirm Files'):
+        st.session_state['files_uploaded'] = True
 
-if prompt := st.chat_input("Hey Carbolic, ..."):
+# Skip upload button - only show if not confirmed yet
+if not st.session_state['files_uploaded']:
+    if st.button('Skip Upload'):
+        st.session_state['files_uploaded'] = True
 
-    message, log = send_message(client, thread, prompt)
+# Logic to hide or show the uploader based on the session state
+if st.session_state['files_uploaded']:
+    st.success('Files are confirmed!')
+    
+    assistant = create_assistant(client, name=assistant_name, instructions=assistant_instructions, files=st.session_state['files'])
 
-    with st.chat_message("user"):
-        st.markdown(prompt)
+    thread = create_thread(client)
 
-    st.session_state.messages.append(log)
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
-    with st.chat_message("assistant"):
+    if prompt := st.chat_input("Hey Carbolic, ..."):
 
-        run, log = generate_response(client, thread, assistant)
+        message, log = send_message(client, thread, prompt)
 
-        message_placeholder = st.empty()
-        message_placeholder.markdown(log['content'])
+        with st.chat_message("user"):
+            st.markdown(prompt)
 
-    st.session_state.messages.append(log)
+        st.session_state.messages.append(log)
+
+        with st.chat_message("assistant"):
+
+            run, log = generate_response(client, thread, assistant)
+
+            message_placeholder = st.empty()
+            message_placeholder.markdown(log['content'])
+
+        st.session_state.messages.append(log)
+else:
+    st.info('Please upload files or skip upload to proceed.')
+
