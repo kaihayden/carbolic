@@ -17,7 +17,7 @@ assistant_instructions = "You are a legal assistant chatbot. Use your knowledge 
 assistant_files=[]
 # ----------------------------------------------------------------- #
 
-st.header("Carbolic by Kai", divider='rainbow')
+st.header("Carbolic", divider='rainbow')
 
 if "model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-4-1106-preview"
@@ -90,3 +90,7 @@ if st.session_state['files_uploaded']:
 else:
     st.info('Please upload files or skip upload to proceed.')
 
+st.markdown(
+    '<div style="text-align: right; vertical-align: bottom;">Made by Kai</div>',
+    unsafe_allow_html=True,
+)
