@@ -37,7 +37,7 @@ if 'files' not in st.session_state:
 assistant_files = st.file_uploader("Select Files", accept_multiple_files=True)
 
 # If files are uploaded, update the session state
-if uploaded_files:
+if assistant_files:
     st.session_state['files'] = assistant_files
 
 # Confirm button - only show if files are uploaded or not confirmed yet
