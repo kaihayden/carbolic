@@ -33,6 +33,9 @@ if 'files_uploaded' not in st.session_state:
 if 'files' not in st.session_state:
     st.session_state['files'] = []
 
+if 'instructions' not in st.session_state:
+    st.session_state['instructions'] = assistant_instructions
+
 if "configurator_state" not in st.session_state:
     st.session_state["configurator_state"] = True
 
@@ -40,6 +43,8 @@ def toggle_closed():
     st.session_state["configurator_state"] = False
 
 with st.expander("Configurator", expanded=st.session_state['configurator_state']):
+
+    st.session_state['instructions'] = st.text_area(label='Instructions for Carbolic', value=st.session_state['instructions'])
 
     assistant_files = st.file_uploader("Select Files", accept_multiple_files=True)
 
@@ -49,15 +54,17 @@ with st.expander("Configurator", expanded=st.session_state['configurator_state']
     if not st.session_state['files_uploaded'] and assistant_files:
         if st.button('Confirm Files', on_click=toggle_closed):
             st.session_state['files_uploaded'] = True
+        st.success('File Upload Success!')
 
     if not st.session_state['files_uploaded']:
         if st.button('Skip Upload', on_click=toggle_closed):
             st.session_state['files_uploaded'] = True
+        st.success('File Upload Skipped')
+
 
 if st.session_state['files_uploaded']:
-    st.success('Files are confirmed!')
     
-    assistant = create_assistant(client, name=assistant_name, instructions=assistant_instructions, files=st.session_state['files'])
+    assistant = create_assistant(client, name=assistant_name, instructions=st.session_state['instructions'], files=st.session_state['files'])
 
     thread = create_thread(client)
 
