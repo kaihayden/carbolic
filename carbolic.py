@@ -1,3 +1,5 @@
+import time
+
 def create_assistant(client, name, instructions, files=None):
 
     assistant = client.beta.assistants.create(
