@@ -99,7 +99,7 @@ bottom: 0;
 width: 100%;
 font-size: 6;
 background-color: transparent;
-color: black;
+color: auto;
 text-align: center;
 }
 </style>
