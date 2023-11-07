@@ -57,12 +57,12 @@ with st.expander("Configurator", expanded=st.session_state['configurator_state']
     if not st.session_state['files_uploaded'] and assistant_files:
         if st.button('Confirm Files', on_click=toggle_closed):
             st.session_state['files_uploaded'] = True
-        st.success('File Upload Success!')
+            st.success('File Upload Success!')
 
     if not st.session_state['files_uploaded']:
         if st.button('Skip Upload', on_click=toggle_closed):
             st.session_state['files_uploaded'] = True
-        st.success('File Upload Skipped')
+            st.success('File Upload Skipped')
 
 
 if st.session_state['files_uploaded']:
