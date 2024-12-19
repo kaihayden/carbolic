@@ -5,7 +5,7 @@ def create_assistant(client, name, instructions, files=None):
     if files:
 
 
-        vector_store = client.beta.vector_stores.create(name="vs_1")
+        vector_store = client.beta.vector_stores.create(name="vector_store_1")
         
         # file_streams = [prepare_file(client, f).id for f in files]
 
