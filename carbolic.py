@@ -24,7 +24,7 @@ def create_assistant(client, name, instructions, files=None):
             tools=[{"type": "file_search"}],
             tool_resources={
                 "file_search": {
-                    "vector_store_ids": "vs_1"
+                    "vector_store_ids": [vector_store.id]
                 }
             },
         )
