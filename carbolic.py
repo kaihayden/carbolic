@@ -2,7 +2,7 @@ import time
 
 def create_assistant(client, name, instructions, files=None):
 
-    if files is not None:
+    if files:
     
         batch_add = client.beta.vector_stores.file_batches.create(
             vector_store_id="vs_1",
