@@ -3,10 +3,14 @@ import time
 def create_assistant(client, name, instructions, files=None):
 
     if files:
-    
-        batch_add = client.beta.vector_stores.file_batches.create(
-            vector_store_id="vs_1",
-            file_ids=[prepare_file(client, f).id for f in files]
+
+
+        vector_store = client.beta.vector_stores.create(name="vs_1")
+        
+        file_streams = [prepare_file(client, f).id for f in files]
+        
+        file_batch = client.beta.vector_stores.file_batches.upload_and_poll(
+            vector_store_id=vector_store.id, files=file_streams
         )
 
         assistant = client.beta.assistants.create(
