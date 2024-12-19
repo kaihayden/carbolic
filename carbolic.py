@@ -29,6 +29,7 @@ def create_assistant(client, name, instructions, files=None):
             name=name,
             instructions=instructions,
             model="gpt-4-1106-preview",
+        )
     
         return assistant
 
