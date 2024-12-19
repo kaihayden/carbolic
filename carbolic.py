@@ -11,9 +11,9 @@ def create_assistant(client, name, instructions, files=None):
 
         time.sleep(10)
                 
-        file_batch = client.beta.vector_stores.file_batches.upload_and_poll(
-            vector_store_id=[vector_store.id], files=files
-        )
+        # file_batch = client.beta.vector_stores.file_batches.upload_and_poll(
+        #     vector_store_id=[vector_store.id], files=files
+        # )
 
         assistant = client.beta.assistants.create(
             name=name,
