@@ -9,7 +9,8 @@ def create_assistant(client, name, instructions, files=None):
         tools=[{"type": "retrieval"}],
         tool_resources={
             "retrieval": {
-            "file_ids": [prepare_file(client, f).id for f in files]
+                "file_ids": [prepare_file(client, f).id for f in files]
+            }
         }
     )
     
