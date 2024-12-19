@@ -2,17 +2,31 @@ import time
 
 def create_assistant(client, name, instructions, files=None):
 
-    assistant = client.beta.assistants.create(
-        name=name,
-        instructions=instructions,
-        model="gpt-4-1106-preview",
-        tools=[{"type": "file_search"}],
-        tool_resources={
-            "file_search": {
-                "file_ids": [prepare_file(client, f).id for f in files]
-            }
-        }
-    )
+    if files:
+    
+        batch_add = client.beta.vector_stores.file_batches.create(
+            vector_store_id="vs_1",
+            file_ids=[prepare_file(client, f).id for f in files]
+        )
+
+        assistant = client.beta.assistants.create(
+            name=name,
+            instructions=instructions,
+            model="gpt-4-1106-preview",
+            tools=[{"type": "file_search"}],
+            tool_resources={
+                "file_search": {
+                    "vector_store_ids": "vs_1"
+                }
+            },
+        )
+
+    else:
+
+        assistant = client.beta.assistants.create(
+            name=name,
+            instructions=instructions,
+            model="gpt-4-1106-preview",
     
     return assistant
 
