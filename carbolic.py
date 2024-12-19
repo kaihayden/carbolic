@@ -6,9 +6,9 @@ def create_assistant(client, name, instructions, files=None):
         name=name,
         instructions=instructions,
         model="gpt-4-1106-preview",
-        tools=[{"type": "retrieval"}],
+        tools=[{"type": "file_search"}],
         tool_resources={
-            "retrieval": {
+            "file_search": {
                 "file_ids": [prepare_file(client, f).id for f in files]
             }
         }
