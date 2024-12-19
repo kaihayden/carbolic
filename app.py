@@ -6,7 +6,7 @@ from openai import OpenAI
 
 from carbolic import create_assistant, create_thread, send_message, generate_response
 
-client = OpenAI(default_headers={"OpenAI-Beta": "assistants=v2"})
+client = OpenAI(headers={"OpenAI-Beta": "assistants=v2"})
 os.environ["OPENAI_API_KEY"] = st.secrets["OPENAI_API_KEY"]
 OpenAI.api_key = os.environ["OPENAI_API_KEY"]
 
