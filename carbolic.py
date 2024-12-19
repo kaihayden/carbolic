@@ -2,7 +2,7 @@ import time
 
 def create_assistant(client, name, instructions, files=None):
 
-    if files:
+    if files is not None:
     
         batch_add = client.beta.vector_stores.file_batches.create(
             vector_store_id="vs_1",
@@ -21,6 +21,8 @@ def create_assistant(client, name, instructions, files=None):
             },
         )
 
+        return assistant
+
     else:
 
         assistant = client.beta.assistants.create(
@@ -28,7 +30,7 @@ def create_assistant(client, name, instructions, files=None):
             instructions=instructions,
             model="gpt-4-1106-preview",
     
-    return assistant
+        return assistant
 
 def prepare_file(client, path):
     file = client.files.create(
