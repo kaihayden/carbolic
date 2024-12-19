@@ -7,12 +7,12 @@ def create_assistant(client, name, instructions, files=None):
 
         vector_store = client.beta.vector_stores.create(name="vector_store_1")
         
-        # file_streams = [prepare_file(client, f).id for f in files]
+        file_streams = [prepare_file(client, f).id for f in files]
 
         print(vector_store.id)
                 
         file_batch = client.beta.vector_stores.file_batches.upload_and_poll(
-            vector_store_id=[vector_store.id], file_ids=[file.id for file in file_batch]
+            vector_store_id=[vector_store.id], file_ids=[file.id for file in file_streams]
         )
 
         assistant = client.beta.assistants.create(
