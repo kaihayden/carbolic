@@ -63,7 +63,7 @@ def start_run(client, thread, assistant):
         thread_id=thread.id,
         assistant_id=assistant.id,
         model="gpt-4-1106-preview",
-        # tools=[{"type": "retrieval"}]
+        tools=[{"type": "file_search"}]
     )
     
     return run
