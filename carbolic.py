@@ -9,7 +9,7 @@ def create_assistant(client, name, instructions, files=None):
         
         # file_streams = [prepare_file(client, f).id for f in files]
 
-        time.sleep(1)
+        time.sleep(10)
                 
         file_batch = client.beta.vector_stores.file_batches.upload_and_poll(
             vector_store_id=[vector_store.id], files=files
